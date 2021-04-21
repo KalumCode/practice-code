@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @Validated
-@RequestMapping(value = "/app/config")
+@RequestMapping(value = "/config")
 public class ConfigController {
 
     @Resource
