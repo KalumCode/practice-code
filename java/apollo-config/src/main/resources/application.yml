@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+# apollo 相关配置
+app:
+  # 与 Apollo 配置中心中的 AppId 一致
+  id: apollo-config-demo-service
+
+apollo:
+  # Apollo 中的 Eureka 注册中心地址
+  meta: http://192.168.0.128:9180
+  #cluster:  # 指定 Apollo 集群，相同集群实例使用对应集群的配置
+  #cacheDir:  # 配置缓存目录，网络不可用时任然可提供配置服务
+  bootstrap:
+    # 启用 apollo
+    enable: true
+
+# 指定环境
+env: DEV
+
+# 自定义配置
+name: apollo-config-demo-service-dev
+mysql:
+  host: localhost
+  port: 3306
+  username: root
+  password: 123456
