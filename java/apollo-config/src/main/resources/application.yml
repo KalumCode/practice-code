@@ -4,7 +4,7 @@ server:
 # apollo 相关配置
 app:
   # 与 Apollo 配置中心中的 AppId 一致
-  id: apollo-config-demo-service
+  id: apollo-config-demo-server
 
 apollo:
   # Apollo 中的 Eureka 注册中心地址
@@ -15,8 +15,8 @@ apollo:
     # 启用 apollo
     enable: true
 
-# 指定环境
-env: DEV
+  # 指定环境
+  env: DEV
 
 # 自定义配置
 name: apollo-config-demo-service-dev
@@ -25,3 +25,7 @@ mysql:
   port: 3306
   username: root
   password: 123456
+
+spring:
+  profiles:
+    active: dev
