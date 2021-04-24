@@ -1,0 +1,18 @@
+server:
+  port: 8082
+
+
+spring:
+  profiles:
+    active: local
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 192.168.0.128:9092  # kafka服务地址和端口
+          zk-nodes: 192.168.0.128:2181  # ZK的集群配置地址和端口
+      bindings:
+        demo-input:
+          destination: demo-topic
+        demo-output:
+          destination: demo-topic
