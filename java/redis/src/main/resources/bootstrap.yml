@@ -1,0 +1,12 @@
+# Spring
+spring:
+  #必须要放在bootstrap.yml中，放在application.yml中不会生效
+  application:
+    # 应用名称
+    name: redis-service
+  profiles:
+    # 环境配置 local,dev,test,prod,
+    active: local
+
+
+
