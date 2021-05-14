@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <!--     <property resource="app.properties"/> -->
+
+    <!-- 日志存放路径 -->
+    <property name="log.path" value="logs"/>
+    <!-- 日志输出格式 -->
+    <properties>
+        <!--通用变量-->
+        <property name="LOG_HOME" value="/home/usr/log/containers"/>
+        <property name="ERROR_LOG_FILE_NAME" value="error"/>
+        <property name="INFO_LOG_FILE_NAME" value="info"/>
+        <property name="JSON_LOG_FILE_NAME" value="trace_json"/>
+        <property name="PID">????</property>
+        <property name="LOG_EXCEPTION_CONVERSION_WORD">%xwEx</property>
+        <property name="LOG_LEVEL_PATTERN">%p</property>
+        <property name="LOG_LEVEL_UUID">%X{requestUUID}</property>
+        <property name="LOG_DATEFORMAT_PATTERN">yyyy-MM-dd HH:mm:ss.SSS</property>
+        <property name="LOG_SLEUTH">b3=%X{b3},TraceId=%X{X-B3-TraceId},SpanId=%X{X-B3-SpanId},ParentSpanId=%X{X-B3-ParentSpanId},Export=%X{X-Span-Export},Sampled=%X{X-B3-Sampled},Flags=%X{X-B3-Flags}</property>
+        <property name="LOG_AUDIT">Org=%X{X-Audit-OrgId},User=%X{X-Audit-UserId}</property>
+        <property name="CONSOLE_LOG_PATTERN">%clr{%d{${LOG_DATEFORMAT_PATTERN}}}{faint} %clr{${LOG_LEVEL_PATTERN}} %clr{${LOG_LEVEL_UUID}} %clr{%F:%L}{cyan}%clr{-}{faint} [${LOG_SLEUTH}] [${LOG_AUDIT}] %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}
+        </property>
+        <property name="LOG_PATTERN" value="[%d{${LOG_DATEFORMAT_PATTERN}}] [${LOG_LEVEL_PATTERN}] [%F:%L] [${LOG_SLEUTH}] [${LOG_AUDIT}] - %m%n"/>
+    </properties>
+    <property name="LOG_PATTERN" value="[%d{${LOG_DATEFORMAT_PATTERN}}] [${LOG_LEVEL_PATTERN}] [%F:%L] [${LOG_SLEUTH}] [${LOG_AUDIT}] - %m%n"/>
+
+    <property name="log.pattern" value="[%d{HH:mm:ss.SSS}] [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
+
+    <springProperty scope="context" name="logLevel" source="logSql.level"/>
+
+    <!-- 控制台输出 -->
+    <appender name="STD_OUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 系统日志输出 -->
+    <appender name="ALL_OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件路径 -->
+        <file>${log.path}/app.log</file>
+        <encoder>
+            <!-- 日志输出格式 -->
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+        <!-- 循环政策：基于时间创建日志文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件名格式 -->
+            <fileNamePattern>${log.path}/app_%d{yyyyMMdd}.log</fileNamePattern>
+            <!-- 日志最大的历史 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="ALL_OUT" />
+        <appender-ref ref="STD_OUT" />
+    </root>
+
+    <!-- 系统操作日志JSON格式输出信息 -->
+    <appender name="SYSTEM_USER_LOG_JSON_OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件路径 -->
+        <file>${log.path}/system_user_log_json.log</file>
+        <encoder>
+　　　　    <pattern>%msg%n</pattern>
+　　　　 </encoder>
+        <append>true</append>
+        <!-- 循环政策：基于时间创建日志文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件名格式 -->
+            <fileNamePattern>${log.path}/system_user_log_json_%d{yyyyMMdd}.log</fileNamePattern>
+            <!-- 日志最大的历史 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+    <logger name="SYSTEM_USER_LOG_JSON">
+        <appender-ref ref="SYSTEM_USER_LOG_JSON_OUT"/>
+    </logger>
+
+    <!--     <logger name="org.apache.zookeeper" level="WARN"/> -->
+
+</configuration>

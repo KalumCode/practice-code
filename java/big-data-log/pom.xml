@@ -6,7 +6,7 @@
 
     <groupId>com.ggread</groupId>
     <!--artifactId-->
-    <artifactId>kafka</artifactId>
+    <artifactId>big-data-log</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 
