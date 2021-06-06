@@ -1,5 +1,9 @@
 package com.ggread.flydemo.controller;
 
+import cn.hutool.core.util.ArrayUtil;
+import io.github.kalumcode.fly.core.starter.log.BaseTraceDTO;
+import io.github.kalumcode.fly.core.starter.log.TracePvDTO;
+import io.github.kalumcode.fly.core.starter.log.TraceUtil;
 import io.github.kalumcode.fly.core.starter.response.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -10,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.github.kalumcode.fly.core.starter.response.BaseResponse.returnSuccess;
 
@@ -30,6 +37,12 @@ public class DemoController {
     })
     @GetMapping(value = "/{id}")
     public BaseResponse<String> getById(@PathVariable("id") Long id) {
-        return returnSuccess("id="+id);
+        TracePvDTO tracePvDTO = new TracePvDTO();
+        tracePvDTO.setProductId(1111L);
+        tracePvDTO.setMemberId(222L);
+        tracePvDTO.setSummary(10);
+
+        TraceUtil.info("PV", tracePvDTO);
+        return returnSuccess("id=" + id);
     }
 }
