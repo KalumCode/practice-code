@@ -27,7 +27,7 @@
         </encoder>
     </appender>
 
-    <!-- 用户访问日志输出  -->
+    <!-- 数据打点日志输出  -->
     <appender name="sys_trace" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/sys_trace.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
