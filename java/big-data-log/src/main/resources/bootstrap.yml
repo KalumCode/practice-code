@@ -1,12 +1,7 @@
-# Spring
 spring:
-  #必须要放在bootstrap.yml中，放在application.yml中不会生效
+  main:
+    allow-bean-definition-overriding: true
   application:
-    # 应用名称
-    name: app-service
+    name: '@project.artifactId@'
   profiles:
-    # 环境配置 local,dev,test,prod,
-    active: local
-
-
-
+    active: '@profile.active@'
