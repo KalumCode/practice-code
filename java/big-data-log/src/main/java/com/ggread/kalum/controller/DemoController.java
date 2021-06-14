@@ -17,7 +17,7 @@ import static io.github.kalumcode.fly.core.starter.response.BaseResponse.returnS
 
 @RestController
 @Validated
-@Api(tags = "系统用户相关接口")
+@Api(tags = "系统用户相关接口1")
 @RequestMapping(value = "/demo")
 public class DemoController {
     /**
